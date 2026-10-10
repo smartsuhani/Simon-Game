@@ -6,16 +6,26 @@ var level = 0;
 var started = false;
 let score = 0;
 
-$(document).keypress(function() {
-
+function startGame() {
     if (!started) {
         level--; // fixes level display on game start //
         toggleTurn(false);
         $("#level-title").text("Level " + level);
         nextSequence();
         started = true;
+        $("#start-btn").hide();
     }
+}
+
+$(document).keydown(function(e) {
+    // Enter/Space on a focused pad or the Start button is handled by its click
+    if ($(e.target).is("button") || e.ctrlKey || e.altKey || e.metaKey) {
+        return;
+    }
+    startGame();
 });
+
+$("#start-btn").click(startGame);
 
 $(".btn").click(function() {
 
@@ -44,7 +54,7 @@ function checkAnswer(currentLevel) {
         playSound("wrong");
         $("body").addClass("game-over");
 
-        $("#level-title").text(`Your Score : ${score} (Press Any Key To Restart)`)
+        $("#level-title").text(`Your Score : ${score} (Press Restart or Any Key)`)
         score = 0;
         setTimeout(function() {
             $("body").removeClass("game-over");
@@ -85,6 +95,7 @@ function startOver() {
     gamePattern = [];
     started = false;
     $('#turn-indicator').hide();
+    $("#start-btn").text("Restart").show();
 }
 
 function toggleTurn(player = true) {

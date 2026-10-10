@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simon_Game</title>
+    <title>Simon Squared Memory Game</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="shortcut icon" href="assets/product-screenshot.png" type="image/x-icon">
@@ -15,25 +15,26 @@
 
 <body class="animation-area">
     
-    <div id="content">
+    <main id="content">
         <h1>Simon Squared Memory Game</h1>
-        <h5 id="level-title">Press A Key to Start</h5>
-        <h5 id="turn-indicator"></h5>
+        <h5 id="level-title" aria-live="polite">Press Start or Any Key</h5>
+        <h5 id="turn-indicator" aria-live="polite"></h5>
+        <button type="button" id="start-btn">Start</button>
         <div class="container">
             <div class="row">
                 
-                <div type="button" id="green" class="btn green"></div>
-                <div type="button" id="red" class="btn red"></div>
+                <button type="button" id="green" class="btn green" aria-label="Green pad"></button>
+                <button type="button" id="red" class="btn red" aria-label="Red pad"></button>
             </div>
 
             <div class="row">
-                <div type="button" id="yellow" class="btn yellow"></div>
-                <div type="button" id="blue" class="btn blue"></div>
+                <button type="button" id="yellow" class="btn yellow" aria-label="Yellow pad"></button>
+                <button type="button" id="blue" class="btn blue" aria-label="Blue pad"></button>
             </div>
         </div>
-    </div>
+    </main>
 
-    <div>
+    <div aria-hidden="true">
         <ul class="box-area">
             <li> </li>
             <li> </li>
