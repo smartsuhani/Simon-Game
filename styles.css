@@ -192,3 +192,22 @@ h1 {
         opacity: 0;
     }
 }
+
+#mute-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 3px solid black;
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    cursor: pointer;
+}
+
+#mute-btn:focus-visible {
+    outline: 4px solid white;
+    outline-offset: 3px;
+}

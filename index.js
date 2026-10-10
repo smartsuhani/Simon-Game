@@ -75,9 +75,57 @@ function animatePress(currentColor) {
     }, 100);
 }
 
+var soundNames = ["red", "blue", "green", "yellow", "wrong"];
+var sounds = {};
+var muted = loadMuted();
+
+soundNames.forEach(function(name) {
+    sounds[name] = new Audio("sounds/" + name + ".mp3");
+    sounds[name].preload = "auto";
+});
+
+updateMuteButton();
+
+$("#mute-btn").click(function() {
+    muted = !muted;
+    saveMuted(muted);
+    updateMuteButton();
+});
+
 function playSound(name) {
-    var audio = new Audio("sounds/" + name + ".mp3");
-    audio.play();
+    if (muted || !sounds[name]) {
+        return;
+    }
+    var audio = sounds[name];
+    audio.currentTime = 0;
+    var result = audio.play();
+    if (result && result.catch) {
+        // autoplay policies can reject play(); the game still works silently
+        result.catch(function() {});
+    }
+}
+
+function updateMuteButton() {
+    $("#mute-btn")
+        .text(muted ? "🔇" : "🔊")
+        .attr("aria-pressed", muted)
+        .attr("aria-label", muted ? "Unmute sound" : "Mute sound");
+}
+
+function loadMuted() {
+    try {
+        return localStorage.getItem("simonMuted") === "true";
+    } catch (e) {
+        return false;
+    }
+}
+
+function saveMuted(value) {
+    try {
+        localStorage.setItem("simonMuted", value);
+    } catch (e) {
+        // storage unavailable; the setting lasts for this session only
+    }
 }
 
 function startOver() {
